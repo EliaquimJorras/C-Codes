@@ -1,3 +1,3 @@
-# C-Codes
+# C Codes
 
-[loves](./MathLove-Code)
+[Couple's compatibility](https://github.dev/EliaquimJorras/C-Codes/blob/main/MathLove-Code/MathLove.c)
