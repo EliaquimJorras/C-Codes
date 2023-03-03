@@ -2,12 +2,14 @@
 #include <stdlib.h>
 #include <string.h>
 #include <ctype.h>
+#include <stdbool.h>
 
 #define MAX_STRING 30
 #define MESSAGE_ALLOC_ERROR "Error on dynamic alloc!"
 
 void NamesDynamicAlloc(char **firstPersonName, char **secondPersonName);
 void ConcatenateNames(char *firstPersonName, char *secondPersonName, char **concatentedNames);
+bool AlreadyVerified(char **lettersVerified, char letter);
 
 void main()
 {
@@ -19,7 +21,46 @@ void main()
 
     ConcatenateNames(firstPersonName, secondPersonName, &concatentedNames);
 
+    int count;
+    bool wasVerified = false;
+    int sizeConcatentedNames = strlen(concatentedNames);
+    int *occorrencesLetters = (int *)malloc(sizeof(int) * sizeConcatentedNames);
+    char *lettersVerified = (char *)malloc(sizeof(char) * 1);
+    int sizeLettersRemaning = sizeConcatentedNames;
+    
+    if(occorrencesLetters == NULL || lettersVerified == NULL)
+    {
+        printf("%s", MESSAGE_ALLOC_ERROR);
+        exit(1);
+    }
+    
+    for(int i = 0; i < sizeLettersRemaning; i++) //eliaquimlarissa
+    {
+        wasVerified = AlreadyVerified(&lettersVerified, concatentedNames[i]);
+        
+        if(wasVerified)
+        {
+            sizeLettersRemaning--;
+            continue;
+        }
+        else{
+            count = 0;
+            
+            for(int j = i; j < sizeLettersRemaning; j++)
+            {
+                if(concatentedNames[j] == concatentedNames[i])
+                    count++;
+            }
+            
+            lettersVerified[i] = concatentedNames[i];
+            occorrencesLetters[i] = count;
+        }
+    }
+    
     printf("\n\nFinal - %s.\n", concatentedNames);
+    
+    for(int i = 0; i < strlen(concatentedNames); i++)
+        printf("%d ", occorrencesLetters[i]); 
 }
 
 void NamesDynamicAlloc(char **firstPersonName, char **secondPersonName)
@@ -70,3 +111,16 @@ void ConcatenateNames(char *firstPersonName, char *secondPersonName, char **conc
     for (int i = 0; (*concatentedNames)[i] != '\0'; i++)
         (*concatentedNames)[i] = tolower((*concatentedNames)[i]);
 }
+
+bool AlreadyVerified(char **lettersVerified, char letter)
+{
+    int sizeLettersVerified = strlen(*lettersVerified);
+    
+    for(int i = 0; i < sizeLettersVerified; i++)
+        if(letter == (*lettersVerified)[i]) return true;
+
+    *lettersVerified = (char *)realloc(*lettersVerified, sizeof(char) * (sizeLettersVerified + 1));
+    
+    return false;
+}
+
