@@ -1,6 +1,7 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
+#include <ctype.h>
 
 #define MAX_STRING 30
 #define MESSAGE_ALLOC_ERROR "Error on dynamic alloc!"
@@ -8,7 +9,7 @@
 void NamesDynamicAlloc(char **firstPersonName, char **secondPersonName);
 void ConcatenateNames(char *firstPersonName, char *secondPersonName, char **concatentedNames);
 
-int main()
+void main()
 {
     char *firstPersonName = NULL, *secondPersonName = NULL;
 
@@ -19,8 +20,6 @@ int main()
     ConcatenateNames(firstPersonName, secondPersonName, &concatentedNames);
 
     printf("\n\nFinal - %s.\n", concatentedNames);
-
-    return 0;
 }
 
 void NamesDynamicAlloc(char **firstPersonName, char **secondPersonName)
@@ -67,4 +66,7 @@ void ConcatenateNames(char *firstPersonName, char *secondPersonName, char **conc
 
     memcpy(*concatentedNames, firstPersonName, sizeFirstPersonName);
     memcpy(&(*concatentedNames)[sizeFirstPersonName], secondPersonName, sizeSecondPersonName);
+
+    for (int i = 0; (*concatentedNames)[i] != '\0'; i++)
+        (*concatentedNames)[i] = tolower((*concatentedNames)[i]);
 }
