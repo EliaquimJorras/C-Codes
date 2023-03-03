@@ -6,6 +6,7 @@
 #define MESSAGE_ALLOC_ERROR "Error on dynamic alloc!"
 
 void NamesDynamicAlloc(char **firstPersonName, char **secondPersonName);
+void ConcatenateNames(char *firstPersonName, char *secondPersonName, char **concatentedNames);
 
 int main()
 {
@@ -13,16 +14,11 @@ int main()
 
     NamesDynamicAlloc(&firstPersonName, &secondPersonName);
 
-    int sizeFirstPersonName = strlen(firstPersonName);
-    int sizeSecondPersonName = strlen(secondPersonName);
+    char *concatentedNames = NULL;
 
-    int sizeConcatanedNames = sizeFirstPersonName + sizeSecondPersonName;
-    char concatanedNames[sizeConcatanedNames + 2];
+    ConcatenateNames(firstPersonName, secondPersonName, &concatentedNames);
 
-    memcpy(concatanedNames, firstPersonName, sizeFirstPersonName);
-    memcpy(&concatanedNames[sizeFirstPersonName], secondPersonName, sizeSecondPersonName);
-
-    printf("\n\nFinal - %s.\n", concatanedNames);
+    printf("\n\nFinal - %s.\n", concatentedNames);
 
     return 0;
 }
@@ -52,4 +48,23 @@ void NamesDynamicAlloc(char **firstPersonName, char **secondPersonName)
 
     (*firstPersonName)[sizeHelper_1 - 1] = '\0';
     (*secondPersonName)[sizeHelper_2 - 1] = '\0';
+}
+
+void ConcatenateNames(char *firstPersonName, char *secondPersonName, char **concatentedNames)
+{
+    int sizeFirstPersonName = strlen(firstPersonName);
+    int sizeSecondPersonName = strlen(secondPersonName);
+
+    int sizeConcatentedNames = sizeFirstPersonName + sizeSecondPersonName;
+
+    *concatentedNames = (char *)malloc(sizeof(char) * sizeConcatentedNames);
+
+    if (*concatentedNames == NULL)
+    {
+        printf("%s", MESSAGE_ALLOC_ERROR);
+        exit(1);
+    }
+
+    memcpy(*concatentedNames, firstPersonName, sizeFirstPersonName);
+    memcpy(&(*concatentedNames)[sizeFirstPersonName], secondPersonName, sizeSecondPersonName);
 }
