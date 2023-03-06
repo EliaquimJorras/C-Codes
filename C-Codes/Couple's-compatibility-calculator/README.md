@@ -28,7 +28,7 @@ I will attach the video link here, however it is in Portuguese which is my nativ
     2 3 2 = (1 + 1) (2 + 1) 2 [remaining]
     4 3 = (2 + 2) 3 [remaining]
     ```
-- The goal is to carry out the above process until you have only two digits and then conclude that:
+- The goal is to carry out the above process until you have only two digits, or exactly 100, and then conclude that:
     ```
     Mary and Karl have a 43% chance of getting along
     ```
