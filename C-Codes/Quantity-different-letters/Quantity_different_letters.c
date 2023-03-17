@@ -2,11 +2,13 @@
 #include <stdlib.h>
 #include <string.h>
 
-int IsAlreadyRead(char *string, char letter)
+int IsAlreadyRead(char *string, char letter, int sizeAlreadyRead)
 {
-    for (int i = 0; string[i] != '\0'; i++)
-        if (letter == string[i])
-            return 1;
+    for (int i = 0; i < sizeAlreadyRead; i++)
+    {
+        if (string[i] < 97 || string[i] > 122) return 1;
+        if (letter == string[i]) return 1;
+    }
 
     return 0;
 }
@@ -17,7 +19,7 @@ void InsertOnAlreadyReady(char **alreadyRead, char letter, int sizeAlreadyRead)
 
     if (*alreadyRead == NULL)
     {
-        puts("Erro no realloc\n");
+        puts("Error to realloc memory!");
         exit(1);
     }
 
@@ -25,17 +27,14 @@ void InsertOnAlreadyReady(char **alreadyRead, char letter, int sizeAlreadyRead)
     (*alreadyRead)[sizeAlreadyRead + 1] = '\0';
 }
 
-void QuantityDifferentLetters(char *concatentedNames)
+int QuantityDifferentLetters(char *concatentedNames, int sizeConcatentedNames)
 {
     int sizeAlreadyRead = 0, isAlreadyRead = 0;
-
     char *alreadyRead = (char *)malloc(sizeof(char) * 2);
-    alreadyRead[0] = '.';
-    alreadyRead[1] = '\0';
 
-    for (int i = 0; concatentedNames[i] != '\0'; i++)
+    for (int i = 0; i < sizeConcatentedNames; i++)
     {
-        isAlreadyRead = IsAlreadyRead(alreadyRead, concatentedNames[i]);
+        isAlreadyRead = IsAlreadyRead(alreadyRead, concatentedNames[i], sizeAlreadyRead);
 
         if (!isAlreadyRead)
         {
@@ -44,21 +43,26 @@ void QuantityDifferentLetters(char *concatentedNames)
         }
     }
 
-    printf("Differents: %s -- Quantity: %d", alreadyRead, sizeAlreadyRead);
     free(alreadyRead);
+
+    return sizeAlreadyRead;
 }
 
 int main()
 {
-    char nome1[] = "mary"; // mary  eliaquim  rodrigo  livia
-    char nome2[] = "karl"; //  karl  larissa   emanuel  carla
-    int tamNomes = strlen(nome1) + strlen(nome2);
-    char nomes[tamNomes];
+    int sizeDifferentLetters = 0;
+    char string1[] = "mary"; // mary eliaquim rodrigo livia
+    char string2[] = "karl";  // karl larissa emanuel carla
 
-    memcpy(nomes, nome1, strlen(nome1));
-    memcpy(&nomes[strlen(nome1)], nome2, strlen(nome2));
+    int sizeStrings = strlen(string1) + strlen(string2);
+    char stringsConcatented[sizeStrings];
 
-    QuantityDifferentLetters(nomes);
+    memcpy(stringsConcatented, string1, strlen(string1));
+    memcpy(&stringsConcatented[strlen(string1)], string2, strlen(string2));
+
+    sizeDifferentLetters = QuantityDifferentLetters(stringsConcatented, sizeStrings);
+
+    printf("Putting the strings together, there are %d different letters", sizeDifferentLetters);
 
     return 0;
 }
