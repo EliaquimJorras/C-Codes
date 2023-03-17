@@ -10,6 +10,7 @@
 void NamesDynamicAlloc(char **firstPersonName, char **secondPersonName);
 void ConcatenateNames(char *firstPersonName, char *secondPersonName, char **concatentedNames);
 char *DifferentLetters(char *concatentedNames, int sizeConcatentedNames);
+int *CountRepetitionEachLetter(char *differentLetters, char *concatentedNames, int sizeDifferenteLetters, int sizeConcatentedNames);
 
 void main()
 {
@@ -25,22 +26,35 @@ void main()
 
     differentLetters = DifferentLetters(concatentedNames, sizeConcatentedNames);
     sizeDifferenteLetters = strlen(differentLetters);
+
+    int *numberRepeats = CountRepetitionEachLetter(differentLetters, concatentedNames, sizeDifferenteLetters, sizeConcatentedNames);
     
-    int countRepetitions = 0;
-    int numberRepeats[sizeDifferenteLetters];
-    
+
     for(int i = 0; i < sizeDifferenteLetters; i++)
     {
-        for(int j = 0; j < sizeConcatentedNames; j++)
-            if(differentLetters[i] == concatentedNames[j])
-                countRepetitions++;
+        if(sizeDifferenteLetters % 2 == 0)
+        {
+            if(i < sizeDifferenteLetters/ 2)
+                numberRepeats[i] += numberRepeats[sizeDifferenteLetters - (i + 1)];
                 
-        numberRepeats[i] = countRepetitions;
-        countRepetitions = 0;
+            else numberRepeats[i] = 0;
+
+        }else if(sizeDifferenteLetters % 2 == 1)
+        {
+            if( i < sizeDifferenteLetters/ 2)
+                numberRepeats[i] += numberRepeats[sizeDifferenteLetters - (i + 1)];
+                
+            if(i >= sizeDifferenteLetters/ 2 + 1)
+                numberRepeats[i] = 0;
+        }
     }
     
+    puts("\n\n\n");
+    for(int i = 0; i < sizeDifferenteLetters; i++)
+        printf("%d ", numberRepeats[i]);
+    puts("\n\n\n");
     
-    printf("\nStrOrig(%s.) - SizeDifferenteLetters(%d).\n", concatentedNames, sizeDifferenteLetters);
+    printf("\n\nStrOrig(%s.) - SizeDifferenteLetters(%d).\n", concatentedNames, sizeDifferenteLetters);
 }
 
 void NamesDynamicAlloc(char **firstPersonName, char **secondPersonName)
@@ -140,3 +154,39 @@ char *DifferentLetters(char *concatentedNames, int sizeConcatentedNames)
     
     return alreadyRead;
 }
+
+int *CountRepetitionEachLetter(char *differentLetters, char *concatentedNames, int sizeDifferenteLetters, int sizeConcatentedNames)
+{
+    int countRepetitions = 0;
+    int *numberRepeats = (int *)malloc(sizeof(int) * sizeDifferenteLetters);
+    
+    for(int i = 0; i < sizeDifferenteLetters; i++)
+    {
+        for(int j = 0; j < sizeConcatentedNames; j++)
+            if(differentLetters[i] == concatentedNames[j])
+                countRepetitions++;
+                
+        numberRepeats[i] = countRepetitions;
+        countRepetitions = 0;
+    }
+    
+    return numberRepeats;
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
