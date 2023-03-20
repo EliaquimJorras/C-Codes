@@ -24,6 +24,11 @@ List = Split("Eliaquim Jorras Alves");
 ### ToUppercase Function
 
 #### Explaning The 'While'
+
+```c
+while( (strHelp[i] = str[i]) ) i++;
+```
+
 Note that the condition has an assignment. The C language will take the contents of this assignment and interpret it as true or false and the language interprets everything non-zero as true and everything equal to zero as false.
 
 So, as long as the character in 'str' is a valid character, it will transfer to 'strHelp' and the 'i' index will increment. When you get to '\0', the condition will be false and the loop ends because, guess what, the '\0' character has a binary code equal to zero. And you don't even need to put the \0 in aux after the loop, because that will be the last assignment.
