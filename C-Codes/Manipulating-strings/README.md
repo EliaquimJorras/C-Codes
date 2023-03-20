@@ -34,6 +34,13 @@ Note that the condition has an assignment. The C language will take the contents
 So, as long as the character in 'str' is a valid character, it will transfer to 'strHelp' and the 'i' index will increment. When you get to '\0', the condition will be false and the loop ends because, guess what, the '\0' character has a binary code equal to zero. And you don't even need to put the \0 in aux after the loop, because that will be the last assignment.
 
 #### Explaning The 'For'
+
+```c
+for (int i = 0; strHelp[i] != '\0'; i++)
+    if (strHelp[i] >= 'a' && strHelp[i] <= 'z')
+        strHelp[i] = strHelp[i] - 'a' + 'A';
+```
+
 - strHelp[i] - 'a' is to know how many jumps this character has away from the letter 'a'
 - +'A' I take the distance and add it to 'A' to arrive at the same letter but capitalized
 
