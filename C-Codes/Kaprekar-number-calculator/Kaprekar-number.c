@@ -2,28 +2,28 @@
 #include <stdlib.h>
 #include <string.h>
 
-void Qtd_Digitos(int num, unsigned long long numPow, int *qtd_Digits)
+void QuantityDigits(int num, unsigned long long numPow, int *quantity_Digits)
 {
     unsigned long long value = numPow;
 
     while (value > 0)
     {
         value /= 10;
-        (*qtd_Digits) += 1;
+        (*quantity_Digits) += 1;
     }
 }
 
-int Kaprekar(int num, int qtdDigits, char *str)
+int Kaprekar(int num, int quantityDigits, char *str)
 {
     long long int kaprekaValue = 0, kapVal_1 = 0, kapVal_2 = 0;
-    int i = 0, j = 0, tam = qtdDigits / 2;
+    int i = 0, j = 0, tam = quantityDigits / 2;
     char strPart1[tam + 1], strPart2[tam + 1];
 
     for (i = 0; i < tam; i++)
         strPart1[i] = str[i];
     strPart1[i] = '\0';
 
-    for (i, j; i <= qtdDigits; i++, j++)
+    for (i, j; i <= quantityDigits; i++, j++)
         strPart2[j] = str[i];
 
     kapVal_1 = atoi(strPart1);
@@ -36,7 +36,7 @@ int Kaprekar(int num, int qtdDigits, char *str)
 
 int main()
 {
-    int num = 0, qtdDigits = 0;
+    int num = 0, quantityDigits = 0;
     unsigned long long numPow = 0;
     int IsKaprekarNumber = 0;
     char *str = NULL;
@@ -50,16 +50,16 @@ int main()
     }
 
     numPow = (unsigned long long) num * num;
-    Qtd_Digitos(num, numPow, &qtdDigits);
-    str = (char *)malloc(sizeof(char) * (qtdDigits + 1));
+    QuantityDigits(num, numPow, &quantityDigits);
+    str = (char *)malloc(sizeof(char) * (quantityDigits + 1));
 
     sprintf(str, "%llu", numPow);
-    IsKaprekarNumber = Kaprekar(num, qtdDigits, str);
+    IsKaprekarNumber = Kaprekar(num, quantityDigits, str);
 
     if (IsKaprekarNumber)
-        printf("\nO valor digitado EH um numero de Kaprekar!\n");
+        printf("\nThe entered value is a Kaprekar number!\n");
     else
-        printf("\nO valor digitado NAO EH um numero de Kaprekar!\n");
+        printf("\nThe value entered is not a Kaprekar number!\n");
 
     free(str);
     
