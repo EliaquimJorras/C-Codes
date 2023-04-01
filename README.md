@@ -10,6 +10,7 @@ Note: Most of these codes came from activities done in the computer science cour
 
  - [Couple's compatibility calculator](https://github.com/EliaquimJorras/C-Codes/tree/main/C-Codes/Couple's-compatibility-calculator)
  - [Amount of different letters in two strings](https://github.com/EliaquimJorras/C-Codes/tree/main/C-Codes/Quantity-different-letters)
+ - [Uppercase and Lowercase manipulation](https://github.com/EliaquimJorras/C-Codes/tree/main/C-Codes/Manipulating-strings)
 
 ## Copyright
 
