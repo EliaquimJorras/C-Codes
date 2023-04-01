@@ -8,9 +8,10 @@ Note: Most of these codes came from activities done in the computer science cour
 
 ## Link to codes
 
- - [Couple's compatibility calculator](https://github.com/EliaquimJorras/C-Codes/tree/main/C-Codes/Couple's-compatibility-calculator)
- - [Amount of different letters in two strings](https://github.com/EliaquimJorras/C-Codes/tree/main/C-Codes/Quantity-different-letters)
- - [Uppercase and Lowercase manipulation](https://github.com/EliaquimJorras/C-Codes/tree/main/C-Codes/Manipulating-strings)
+ - [Couple's Compatibility Calculator](https://github.com/EliaquimJorras/C-Codes/tree/main/C-Codes/Couple's-compatibility-calculator)
+ - [Amount Of Different Letters In Two Strings](https://github.com/EliaquimJorras/C-Codes/tree/main/C-Codes/Quantity-different-letters)
+ - [Uppercase And Lowercase Manipulation](https://github.com/EliaquimJorras/C-Codes/tree/main/C-Codes/Manipulating-strings)
+ - [Kaprekar Calculator](https://github.com/EliaquimJorras/C-Codes/tree/main/C-Codes/Kaprekar-number-calculator)
 
 ## Copyright
 
