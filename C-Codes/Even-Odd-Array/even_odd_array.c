@@ -1,15 +1,12 @@
 #include <stdio.h>
 
-void PrintVector(int *array, int sizeArray)
+void PrintArray(int *array, int sizeArray)
 {
     if (sizeArray == 0)
-        printf("there are no values in this array.");
+        printf("There are no values in this array.");
     else
-    {
-        for (int i = 0; i < sizeArray - 1; i++)
-            printf("%d, ", array[i]);
-        printf("%d.", array[sizeArray - 1]);
-    }
+        for (int i = 0; i < sizeArray; i++)
+            (i + 1 == sizeArray) ? printf("%d.", array[i]) : printf("%d, ", array[i]);
 }
 
 int main()
@@ -41,10 +38,10 @@ int main()
         }
 
         printf("\nEven Numbers: ");
-        PrintVector(evenNumbers, evenQuantity);
+        PrintArray(evenNumbers, evenQuantity);
 
         printf("\nOdd Numbers: ");
-        PrintVector(oddNumbers, oddQuantity);
+        PrintArray(oddNumbers, oddQuantity);
     }
     else
         printf("I said: \"Enter a non-zero positive number\". Try again.\n\n");
