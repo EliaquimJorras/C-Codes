@@ -13,6 +13,7 @@ char *DifferentLetters(char *concatentedNames, int sizeConcatentedNames);
 int *CountRepetitionEachLetter(char *differentLetters, char *concatentedNames, int sizeDifferenteLetters, int sizeConcatentedNames);
 int PrintArray(int *array, int sizeArray);
 void CalculateCompatibility(int *array, int sizeArray);
+void ReturnAnswerCompatibility(int *array, int sizeArray, char *firstPersonName, char *secondPersonName);
 
 void main()
 {
@@ -33,23 +34,7 @@ void main()
     
     CalculateCompatibility(numberRepeats, sizeDifferenteLetters);
     
-    char number[2];
-    char finalPercentage[sizeDifferenteLetters];
-    
-    for(int i = 0; i <= 3; i++)
-    {
-        if(i != 3)
-        {
-            sprintf(number, "%d", numberRepeats[i]);
-            finalPercentage[i] = number[0];
-        }else
-            finalPercentage[i] = '\0';
-    }
-
-    if(finalPercentage[1] != '0' && finalPercentage[2] == '0')
-        finalPercentage[2] = '\0';
-    
-    printf("\n\n%s and %s has %s%% to getting along.", firstPersonName, secondPersonName, finalPercentage);
+    ReturnAnswerCompatibility(numberRepeats, sizeDifferenteLetters, firstPersonName, secondPersonName);
 }
 
 void NamesDynamicAlloc(char **firstPersonName, char **secondPersonName)
@@ -214,4 +199,25 @@ void CalculateCompatibility(int *array, int sizeArray)
     sizeArray = firstZeroPosition % 2 == 0 ? sizeArray / 2 : sizeArray / 2 + 1;
     
     CalculateCompatibility(array, sizeArray);
+}
+
+void ReturnAnswerCompatibility(int *array, int sizeArray, char *firstPersonName, char *secondPersonName)
+{
+    char number[2];
+    char finalPercentage[sizeArray];
+    
+    for(int i = 0; i <= 3; i++)
+    {
+        if(i != 3)
+        {
+            sprintf(number, "%d", array[i]);
+            finalPercentage[i] = number[0];
+        }else
+            finalPercentage[i] = '\0';
+    }
+
+    if(finalPercentage[1] != '0' && finalPercentage[2] == '0')
+        finalPercentage[2] = '\0';
+    
+    printf("\n\n%s and %s has %s%% to getting along.", firstPersonName, secondPersonName, finalPercentage);
 }
