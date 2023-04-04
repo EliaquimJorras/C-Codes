@@ -11,6 +11,8 @@ void NamesDynamicAlloc(char **firstPersonName, char **secondPersonName);
 void ConcatenateNames(char *firstPersonName, char *secondPersonName, char **concatentedNames);
 char *DifferentLetters(char *concatentedNames, int sizeConcatentedNames);
 int *CountRepetitionEachLetter(char *differentLetters, char *concatentedNames, int sizeDifferenteLetters, int sizeConcatentedNames);
+int PrintArray(int *array, int sizeArray);
+void CalculateCompatibility(int *array, int sizeArray);
 
 void main()
 {
@@ -29,32 +31,25 @@ void main()
 
     int *numberRepeats = CountRepetitionEachLetter(differentLetters, concatentedNames, sizeDifferenteLetters, sizeConcatentedNames);
     
-
-    for(int i = 0; i < sizeDifferenteLetters; i++)
+    CalculateCompatibility(numberRepeats, sizeDifferenteLetters);
+    
+    char number[2];
+    char finalPercentage[sizeDifferenteLetters];
+    
+    for(int i = 0; i <= 3; i++)
     {
-        if(sizeDifferenteLetters % 2 == 0)
+        if(i != 3)
         {
-            if(i < sizeDifferenteLetters/ 2)
-                numberRepeats[i] += numberRepeats[sizeDifferenteLetters - (i + 1)];
-                
-            else numberRepeats[i] = 0;
-
-        }else if(sizeDifferenteLetters % 2 == 1)
-        {
-            if( i < sizeDifferenteLetters/ 2)
-                numberRepeats[i] += numberRepeats[sizeDifferenteLetters - (i + 1)];
-                
-            if(i >= sizeDifferenteLetters/ 2 + 1)
-                numberRepeats[i] = 0;
-        }
+            sprintf(number, "%d", numberRepeats[i]);
+            finalPercentage[i] = number[0];
+        }else
+            finalPercentage[i] = '\0';
     }
+
+    if(finalPercentage[1] != '0' && finalPercentage[2] == '0')
+        finalPercentage[2] = '\0';
     
-    puts("\n\n\n");
-    for(int i = 0; i < sizeDifferenteLetters; i++)
-        printf("%d ", numberRepeats[i]);
-    puts("\n\n\n");
-    
-    printf("\n\nStrOrig(%s.) - SizeDifferenteLetters(%d).\n", concatentedNames, sizeDifferenteLetters);
+    printf("\n\n%s and %s has %s%% to getting along.", firstPersonName, secondPersonName, finalPercentage);
 }
 
 void NamesDynamicAlloc(char **firstPersonName, char **secondPersonName)
@@ -173,20 +168,50 @@ int *CountRepetitionEachLetter(char *differentLetters, char *concatentedNames, i
     return numberRepeats;
 }
 
+int PrintArray(int *array, int sizeArray)
+{
+    printf("\n => ");
+    
+    for(int i = 0; i < sizeArray; i++){
+        
+        printf("%d ", array[i]);
+        
+        if(array[i + 1] == 0) return i + 1;
+    }
+    
+    return 0;
+}
 
+void CalculateCompatibility(int *array, int sizeArray)
+{
+    int firstZeroPosition = PrintArray(array, sizeArray);
+    
+    if(array[0] == 1 && array[1] == 0 && array[2] == 0) return; // 100 compatibility
+    
+    if(array[2] == 0) return; // 01 ~ 99 compatibility
+    
+    for(int i = 0; i < sizeArray; i++)
+    {
+        if(sizeArray % 2 == 0)
+        {
+            if(i < sizeArray/ 2)
+                array[i] += array[sizeArray - (i + 1)];
+                
+            else array[i] = 0;
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+        }else if(sizeArray % 2 == 1)
+        {
+            if( i <= sizeArray/ 2)
+            {
+                if(array[i] == array[sizeArray - (i + 1)]) continue;
+                    
+                array[i] += array[sizeArray - (i + 1)];
+                
+            }else array[i] = 0;
+        }
+    }
+    
+    sizeArray = firstZeroPosition % 2 == 0 ? sizeArray / 2 : sizeArray / 2 + 1;
+    
+    CalculateCompatibility(array, sizeArray);
+}
