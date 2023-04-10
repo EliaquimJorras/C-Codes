@@ -159,7 +159,7 @@ void CalculateCompatibility(int *array, int sizeArray)
         {
             if( i <= sizeArray/ 2)
             {
-                if(array[i] == array[sizeArray - (i + 1)]) continue;
+                if(i == sizeArray/2) continue;
                     
                 array[i] += array[sizeArray - (i + 1)];
                 
